@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import cartopy.crs as ccrs
 import numpy as np
 import datetime
 import scipy.special as sp
@@ -82,35 +83,43 @@ if __name__ == '__main__':
     def some_data(i):   # function returns a 2D data array
         return Z1l[i], Z2l[i], Z3l[i] 
 
-    fig, (ax1, ax2, ax3) = plt.subplots(3,1)
+    fig = plt.figure(figsize=(5, 7))
+    ax1 = fig.add_subplot(3, 1, 1, projection=ccrs.PlateCarree())
+    ax2 = fig.add_subplot(3, 1, 2, projection=ccrs.PlateCarree())
+    ax3 = fig.add_subplot(3, 1, 3, projection=ccrs.PlateCarree())
+
     m1 = np.max(np.array(Z1l))    
     m2 = np.max(np.array(Z2l))    
     m3 = np.max(np.array(Z3l))    
     levels1=np.arange(-0.5,m1,0.5)
     levels2=np.arange(-0.5,m2,0.5)
     levels3=np.arange(-0.5,m3,0.5)
-    cont1 = ax1.contourf(lon_m, 90.-colat_m, some_data(0)[0], levels1,  cmap=plt.cm.jet)    # first image on screen
-    cont2 = ax2.contourf(lon_m, 90.-colat_m, some_data(0)[1], levels2,  cmap=plt.cm.jet)    # first image on screen
-    cont3 = ax3.contourf(lon_m, 90.-colat_m, some_data(0)[2], levels3,  cmap=plt.cm.jet)    # first image on screen
+    cont1 = ax1.contourf(lon_m, 90.-colat_m, some_data(0)[0], levels1,  cmap=plt.cm.jet, transform=ccrs.PlateCarree())    # first image on screen
+    cont2 = ax2.contourf(lon_m, 90.-colat_m, some_data(0)[1], levels2,  cmap=plt.cm.jet, transform=ccrs.PlateCarree())    # first image on screen
+    cont3 = ax3.contourf(lon_m, 90.-colat_m, some_data(0)[2], levels3,  cmap=plt.cm.jet, transform=ccrs.PlateCarree())    # first image on screen
     ax1.set_title('layer1, '+ str(data['time0'] + timedelta(seconds=step*0)))  
     ax2.set_title('layer2, '+ str(data['time0'] + timedelta(seconds=step*0)))  
     ax3.set_title('GIM, '+ str(data['time0'] + timedelta(seconds=step*0)))  
+    ax1.coastlines()
+    ax2.coastlines()
+    ax3.coastlines()
     fig.colorbar(cont1, ax=ax1)
     fig.colorbar(cont2, ax=ax2)
     fig.colorbar(cont3, ax=ax3)
     plt.tight_layout()
     # animation function
+
     def animate(i):
         global cont1, cont2, cont3
         z1, z2, z3 = some_data(i)
         for c1 , c2 ,c3 in zip(cont1.collections, cont2.collections, cont3.collections):
             c1.remove()  # removes only the contours, leaves the rest intact
-            c2.remove()  # removes only the contours, leaves the rest intact
-            c3.remove()  # removes only the contours, leaves the rest intact
+            c2.remove()  
+            c3.remove()  
 
-        cont1 = ax1.contourf(lon_m, 90.-colat_m, z1, levels1,  cmap=plt.cm.jet)
-        cont2 = ax2.contourf(lon_m, 90.-colat_m, z2, levels2,  cmap=plt.cm.jet)
-        cont3 = ax3.contourf(lon_m, 90.-colat_m, z3, levels3,  cmap=plt.cm.jet)
+        cont1 = ax1.contourf(lon_m, 90.-colat_m, z1, levels1,  cmap=plt.cm.jet, transform=ccrs.PlateCarree())
+        cont2 = ax2.contourf(lon_m, 90.-colat_m, z2, levels2,  cmap=plt.cm.jet, transform=ccrs.PlateCarree())
+        cont3 = ax3.contourf(lon_m, 90.-colat_m, z3, levels3,  cmap=plt.cm.jet, transform=ccrs.PlateCarree())
         ax1.set_title('layer1, '+ str(data['time0'] + timedelta(seconds=step*i)))  
         ax2.set_title('layer2, '+ str(data['time0'] + timedelta(seconds=step*i)))  
         ax3.set_title('GIM, '+ str(data['time0'] + timedelta(seconds=step*i)))  
