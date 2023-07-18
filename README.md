@@ -6,7 +6,7 @@ Global Ionopsheric Mapping with GNSS.
 
 ## About
 
-This code imolements an original method for constructing Global Ionospheric Maps (GIM) of Total Electron Content (TEC) based on the analysis of solely phase measurements of GNSS signals at a pair of coherent frequencies, which does not require satellite/receiver DCBs estimations and thus makes it easier to combine different GNSS systems within single reconstruction algorithm.
+This code implements an original method for constructing Global Ionospheric Maps (GIM) of Total Electron Content (TEC) based on the analysis of solely phase measurements of GNSS signals at a pair of coherent frequencies, which does not require satellite/receiver DCBs estimations and thus makes it easier to combine different GNSS systems within single reconstruction algorithm.
 This  method uses the representation of the ionosphere as two thin layers with the electron content in each of them given by a truncated expansion into a series of spherical harmonics in MLT system. The expansion coefficients are determined by least squares with inequality constrains representing the positivity of TEC, implemented by solving the corresponding linear complementarity problem (LCP). Algorithm description for single thin layer model is given in (cite if using code for your research): 
 
     Padokhin, A. M., E. S. Andreeva, M. O. Nazarenko, and S. A. Kalashnikova. "Phase-Difference Approach for GNSS Global Ionospheric Total Electron Content Mapping." Radiophysics and Quantum Electronics, 65(7): 481-495, 2023
