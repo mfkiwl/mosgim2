@@ -1,12 +1,13 @@
 # MosGIM2
 
-Global Ionopsheric Maping with GNSS. 
+Global Ionopsheric Mapping with GNSS. 
 
 ![MosGIM sample output](animation.gif)
 
-## Rules of road
+## About
 
-Algorithm description for single layer is given in (cite if using code for your research): 
+This code imolements an original method for constructing Global Ionospheric Maps (GIM) of Total Electron Content (TEC) based on the analysis of solely phase measurements of GNSS signals at a pair of coherent frequencies, which does not require satellite/receiver DCBs estimations and thus makes it easier to combine different GNSS systems within single reconstruction algorithm.
+This  method uses the representation of the ionosphere as two thin layers with the electron content in each of them given by a truncated expansion into a series of spherical harmonics in MLT system. The expansion coefficients are determined by least squares with inequality constrains representing the positivity of TEC, implemented by solving the corresponding linear complementarity problem (LCP). Algorithm description for single thin layer model is given in (cite if using code for your research): 
 
     Padokhin, A. M., E. S. Andreeva, M. O. Nazarenko, and S. A. Kalashnikova. "Phase-Difference Approach for GNSS Global Ionospheric Total Electron Content Mapping." Radiophysics and Quantum Electronics, 65(7): 481-495, 2023
     
@@ -17,8 +18,8 @@ Find full text paper [here](https://www.researchgate.net/profile/Artem-Padokhin/
 Code and launch were tested for Linux (Mint) and `python3.6.9`
 Code uses `numpy`, `scipy`, `matplotlib`, `cartopy`, `h5py` and `lemkelcp` packages.
 If you get TypeError: 'range' object does not support item assignment when calling `solve2.py`, adjust lines 8&9 `lemkelcp.py` in python dist-packages accordingly:
-self.wPos = list(range(n))
-self.zPos = list(range(n,2*n)) 
+    self.wPos = list(range(n))
+    self.zPos = list(range(n,2*n)) 
 
 ## Use test data
 
