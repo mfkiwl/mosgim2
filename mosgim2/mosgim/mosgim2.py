@@ -354,13 +354,6 @@ def constructG(nbig1, mbig1, nbig2, mbig2, nT, theta, phi, timeindex, linear):
         rowi[len_rhs * n_coefs_layer1 + i * n_coefs_layer2: len_rhs * n_coefs_layer1 + (i + 1) * n_coefs_layer2] = (len_rhs + i) 
         coli[len_rhs * n_coefs_layer1 + i * n_coefs_layer2: len_rhs * n_coefs_layer1 + (i + 1) * n_coefs_layer2] = np.arange(timeindex[i] * n_coefs + n_coefs_layer1, (timeindex[i] + 1) * n_coefs, 1) 
 
-###just test it
-    idx = (rowi<0)
-    if np.any(idx):
-        print(np.argwhere(idx))
-        print(rowi[idx])   
-########################
-
 
     G = csr_matrix((data, (rowi, coli)), shape=(2 * len_rhs, (nT + nT_add) * n_coefs))
     print('matrix (G) done')
