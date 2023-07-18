@@ -32,6 +32,7 @@ MANIFEST
 tmp/
 *.np[yz]
 *.h5
+*.gif
 
 # old versions
 prepare2old.py
