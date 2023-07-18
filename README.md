@@ -15,7 +15,7 @@ Find full text paper [here](https://www.researchgate.net/profile/Artem-Padokhin/
 ## Prerequirements 
 
 Code and launch were tested for Linux (Mint) and `python3.6.9`
-Code uses `numpy`, `scipy`, `matplotlib`, `h5py` and `lemkelcp` packages.
+Code uses `numpy`, `scipy`, `matplotlib`, `cartopy`, `h5py` and `lemkelcp` packages.
 If you get TypeError: 'range' object does not support item assignment when calling `solve2.py`, adjust lines 8&9 `lemkelcp.py` in python dist-packages accordingly:
 self.wPos = list(range(n))
 self.zPos = list(range(n,2*n)) 
