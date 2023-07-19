@@ -49,6 +49,9 @@ if __name__ == '__main__':
     if ndays == 1:
         np.savez(outputfile, time0=data['day'], linear=linear, nmaps= tint + nT_add, nbig_layer1=nbig_layer1, mbig_layer1=mbig_layer1, nbig_layer2=nbig_layer2, mbig_layer2=mbig_layer2, res=res, disp_scale=disp_scale)
     if ndays == 3:
+        n_coefs_layer1 = (nbig_layer1 + 1)**2 - (nbig_layer1 - mbig_layer1) * (nbig_layer1 - mbig_layer1 + 1)
+        n_coefs_layer2 = (nbig_layer2 + 1)**2 - (nbig_layer2 - mbig_layer2) * (nbig_layer2 - mbig_layer2 + 1)
+        n_coefs = n_coefs_layer1 + n_coefs_layer2
         np.savez(outputfile, time0=data['day']+timedelta(days=1), linear=linear, nmaps= tint + nT_add, nbig_layer1=nbig_layer1, mbig_layer1=mbig_layer1, nbig_layer2=nbig_layer2, mbig_layer2=mbig_layer2, 
                  res=res[n_coefs * (tint):n_coefs * (2 * tint + nT_add)], disp_scale=disp_scale)
 
